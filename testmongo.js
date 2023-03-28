@@ -54,7 +54,7 @@ app.get("/api/mongo/:item", function (req, res) {
   run().catch(console.dir);
 });
 
-app.get("api/mongo/getAllTickets"),
+app.get("api/getAllTickets"),
   function (req, res) {
     const client = new MongoClient(uri);
 
@@ -63,6 +63,7 @@ app.get("api/mongo/getAllTickets"),
         const database = client.db("CMPS415");
         const tickets = database.collection("Ticket");
 
+        const query = {};
         const ticket = await tickets.find(tickets);
         console.log(ticket);
         res.send("Found these: " + JSON.stringify(ticket));
