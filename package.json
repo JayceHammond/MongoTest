@@ -1,10 +1,10 @@
 {
-  "name": "ckMongoTest",
+  "name": "415 Project",
   "version": "1.0.0",
-  "description": "CKs Express Mongo Test on Render",
+  "description": "Jds 415 Project",
   "main": "testmongo.js",
   "repository": "https://github.com/JayceHammond/MongoTest",
-  "author": "CK",
+  "author": "Jd",
   "license": "MIT",
   "private": false,
   "scripts": {
