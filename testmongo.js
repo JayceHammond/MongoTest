@@ -53,3 +53,21 @@ app.get("/api/mongo/:item", function (req, res) {
   }
   run().catch(console.dir);
 });
+
+app.get("api/mongo/getAllTickets"),
+  function (req, res) {
+    const client = new MongoClient(uri);
+
+    async function run() {
+      try {
+        const database = client.db("CMPS415");
+        const tickets = database.collection("Ticket");
+
+        const ticket = await tickets.find(tickets);
+        console.log(ticket);
+        res.send("Found these: " + JSON.stringify(ticket));
+      } finally {
+        await client.close();
+      }
+    }
+  };
