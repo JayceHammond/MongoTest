@@ -54,7 +54,7 @@ app.get("/api/mongo/:item", function (req, res) {
   run().catch(console.dir);
 });
 
-app.get("/rest/ticket/:_id"),
+app.get("/rest/ticket/:id"),
   function (req, res) {
     const client = new MongoClient(uri);
 
@@ -63,7 +63,7 @@ app.get("/rest/ticket/:_id"),
         const database = client.db("CMPS415");
         const tickets = database.collection("Ticket");
 
-        const query = { _id: req.params._id };
+        const query = { _id: req.params.id };
         const ticket = await tickets.findOne(query);
         console.log(ticket);
         res.send("Found this: " + JSON.stringify(ticket));
@@ -71,4 +71,5 @@ app.get("/rest/ticket/:_id"),
         await client.close();
       }
     }
+    run().catch(console.dir);
   };
