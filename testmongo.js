@@ -28,7 +28,7 @@ app.get("/say/:name", function (req, res) {
 });
 
 // Route to access database:
-app.get("/api/mongo/:item", function (req, res) {
+app.get("/rest/part/:item", function (req, res) {
   const client = new MongoClient(uri);
   const searchKey = "{ partID: '" + req.params.item + "' }";
   console.log("Looking for: " + searchKey);
@@ -53,23 +53,3 @@ app.get("/api/mongo/:item", function (req, res) {
   }
   run().catch(console.dir);
 });
-
-app.get("/api/mongo/ticket/:id"),
-  function (req, res) {
-    const client = new MongoClient(uri);
-
-    async function run() {
-      try {
-        const database = client.db("CMPS415");
-        const tickets = database.collection("Ticket");
-
-        const query = { _id: req.params.id };
-        const ticket = await tickets.findOne(query);
-        console.log(ticket);
-        res.send("Found this: " + JSON.stringify(ticket));
-      } finally {
-        await client.close();
-      }
-    }
-    run().catch(console.dir);
-  };
