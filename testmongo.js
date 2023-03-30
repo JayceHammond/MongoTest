@@ -36,14 +36,14 @@ app.get("/rest/ticket/:id", function (req, res) {
   async function run() {
     try {
       const database = client.db("CMPS415");
-      const parts = database.collection("Ticket");
+      const tickets = database.collection("Ticket");
 
       // Hardwired Query for a part that has partID '12345'
       // const query = { partID: '12345' };
       // But we will use the parameter provided with the route
-      const query = { _id: req.params.id };
+      const query = { assignee_ID: req.params.id };
 
-      const ticket = await parts.findOne(query);
+      const ticket = await tickets.findOne(query);
       console.log(ticket);
       res.send("Found this: " + JSON.stringify(ticket)); //Use stringify to print a json
     } finally {
