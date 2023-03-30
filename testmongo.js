@@ -28,7 +28,7 @@ app.get("/say/:name", function (req, res) {
 });
 
 // Route to access database:
-app.get("/rest/ticket/:assignee", function (req, res) {
+app.get("/rest/ticket/: " + assignee_ID, function (req, res) {
   const client = new MongoClient(uri);
   const searchKey = "{ Ticket ID : '" + req.params.assignee + "' }";
   console.log("Looking for: " + searchKey);
