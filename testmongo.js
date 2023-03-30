@@ -54,7 +54,7 @@ app.get("/api/mongo/:item", function (req, res) {
   run().catch(console.dir);
 });
 
-app.get("/rest/ticket/:id"),
+app.get("/api/mongo/:id"),
   function (req, res) {
     const client = new MongoClient(uri);
 
