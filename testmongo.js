@@ -64,7 +64,7 @@ app.get("/rest/list/", function (req, res) {
       const database = client.db("CMPS415");
       const tickets = database.collection("Ticket");
 
-      const query = { _id };
+      //const query = { _id };
 
       const allTickets = tickets.find();
       console.log(allTickets);
