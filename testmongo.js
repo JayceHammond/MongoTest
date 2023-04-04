@@ -53,3 +53,25 @@ app.get("/rest/ticket/:id", function (req, res) {
   }
   run().catch(console.dir);
 });
+
+app.get("/rest/list", function (req, res) {
+  const client = new MongoClient(uri);
+  const searchKey = "All Tickets: ";
+  console.log("Looking for: " + searchKey);
+
+  async function run() {
+    try {
+      const database = client.db("CMPS415");
+      const tickets = database.collection("Ticket");
+
+      const query = { _id };
+
+      const allTickets = await tickets.find(query);
+      console.log(allTickets);
+      res.send("Found this: " + JSON.stringify(allTickets));
+    } finally {
+      await client.close();
+    }
+  }
+  run().catch(console.dir);
+});
