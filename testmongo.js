@@ -30,7 +30,7 @@ app.get("/say/:name", function (req, res) {
 // Route to access database:
 app.get("/rest/ticket/:id", function (req, res) {
   const client = new MongoClient(uri);
-  const searchKey = "{ Ticket ID : '" + req.params.id.toString() + "' }";
+  const searchKey = "{ Ticket ID : '" + req.params.id + "' }";
   console.log("Looking for: " + searchKey);
 
   async function run() {
@@ -41,7 +41,7 @@ app.get("/rest/ticket/:id", function (req, res) {
       // Hardwired Query for a part that has partID '12345'
       // const query = { partID: '12345' };
       // But we will use the parameter provided with the route
-      const query = { id: req.params.id };
+      const query = { id: parseInt(req.params.id) };
 
       const ticket = await tickets.findOne(query);
       console.log(ticket);
