@@ -66,7 +66,7 @@ app.get("/rest/list/", function (req, res) {
 
       const query = { _id };
 
-      const allTickets = await tickets.find();
+      const allTickets = tickets.find();
       console.log(allTickets);
       res.send("Found this: " + JSON.stringify(allTickets));
     } finally {
