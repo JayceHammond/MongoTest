@@ -54,7 +54,7 @@ app.get("/rest/ticket/:id", function (req, res) {
   run().catch(console.dir);
 });
 
-app.get("/rest/list/", function (req, res) {
+app.get("/rest/list", function (req, res) {
   const client = new MongoClient(uri);
   const searchKey = "All Tickets: ";
   console.log("Looking for: " + searchKey);
@@ -62,13 +62,9 @@ app.get("/rest/list/", function (req, res) {
   async function run() {
     try {
       const database = client.db("CMPS415");
-      const tickets = database.collection("Ticket");
-      var allTickets = db.c.find({}, { _id: 1 }).map(function (tickets) {
-        return tickets._id;
-      });
-
-      int = 0;
-      res.send("Found this: " + JSON.stringify(allTickets));
+      //const tickets = database.collection("Ticket");
+      var iterator = database.find({}, { Ticket: 0 });
+      res.send("Found these: " + JSON.stringify(iterator));
     } finally {
       await client.close();
     }
