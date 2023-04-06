@@ -62,9 +62,10 @@ app.get("/rest/list", function (req, res) {
   async function run() {
     try {
       const database = client.db("CMPS415");
+      const allTickets = database.collection("Ticket");
+
+      res.send("Found these: " + JSON.stringify(allTickets.find()));
       //const tickets = database.collection("Ticket");
-      var iterator = database.find({}, { Ticket: 0 });
-      res.send("Found these: " + JSON.stringify(iterator));
     } finally {
       await client.close();
     }
