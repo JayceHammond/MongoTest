@@ -63,17 +63,12 @@ app.get("/rest/list/", function (req, res) {
     try {
       const database = client.db("CMPS415");
       const tickets = database.collection("Ticket");
-      var idArr = db.collection.distinct("id", {
-        $expr: { $gt: ["$propB", "$propA"] },
+      var allTickets = db.c.find({}, { _id: 1 }).map(function (tickets) {
+        return tickets._id;
       });
 
       int = 0;
-
-      for (i; i < tickets.count; i++) {
-        const query = { _ids: idArr[i]._id };
-        const allTickets = tickets.findOne(query);
-        res.send("Found this: " + JSON.stringify(allTickets));
-      }
+      res.send("Found this: " + JSON.stringify(allTickets));
     } finally {
       await client.close();
     }
