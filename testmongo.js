@@ -64,7 +64,7 @@ app.get("/rest/list", function (req, res) {
       const database = client.db("CMPS415");
       const allTickets = database.collection("Ticket");
 
-      res.send("Found these: " + JSON.stringify(allTickets.find()));
+      res.send("Found these: " + JSON.stringify(allTickets.find().toArray()));
       //const tickets = database.collection("Ticket");
     } finally {
       await client.close();
