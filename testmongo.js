@@ -65,6 +65,7 @@ app.get("/rest/list", function (req, res) {
       const allTickets = database.collection("Ticket");
       var myArr = allTickets.find().toArray();
       for (var i = 0; i < myArr.length; i++) {
+        console.log(allTickets[i]);
         res.send("Found this: " + JSON.stringify(allTickets[i]));
       }
       //const tickets = database.collection("Ticket");
