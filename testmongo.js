@@ -78,7 +78,7 @@ app.get("/rest/list", function (req, res) {
       
       await cursor.forEach(console.dir);
 
-      res.send("Found these: " + JSON.stringify(cursor.forEach(x => x).toArray()));
+      res.send("Found these: " + JSON.stringify(cursor.forEach(x => x)));
     } finally {
       await client.close();
     }
