@@ -14,9 +14,6 @@ console.log("Server started at http://localhost:" + port);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const client = new MongoClient(uri);
-const database = client.db("CMPS415");
-
 // routes will go here
 
 // Default route:
@@ -37,6 +34,8 @@ app.get("/rest/ticket/:id", function (req, res) {
 
   async function run() {
     try {
+      const client = new MongoClient(uri);
+      const database = client.db("CMPS415");
       const tickets = database.collection("Ticket");
 
       // Hardwired Query for a part that has partID '12345'
@@ -60,6 +59,8 @@ app.get("/rest/list", function (req, res) {
 
   async function run() {
     try {
+      const client = new MongoClient(uri);
+      const database = client.db("CMPS415");
       const ticket = database.collection("Ticket");
       let results = await ticket.find({}).limit(50).toArray()
       res.send(results).status(200);
@@ -75,10 +76,12 @@ app.post("/rest/ticket/", function (req, res){
 
   async function run(){
     try{
+      const client = new MongoClient(uri);
+      const database = client.db("CMPS415");
       const ticket = database.collection("Ticket");
       let newDocument = req.body;
       newDocument.recipient = "Batman";
-      let result = await collection.insertOne(newDocument);
+      let result = await ticket.insertOne(newDocument);
       res.send(result).status(204);
     }finally{
       await client.close();
