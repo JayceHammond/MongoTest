@@ -65,7 +65,8 @@ app.get("/rest/list", function (req, res) {
       const ticket = database.collection("Ticket");
       ticket.find({}).toArray(function(err, result){
         if(err) throw err;
-        console.log(result);
+        console.log(JSON.stringify(result));
+        res.send("Found these: " + JSON.stringify(result));
       });
 
     } finally {
