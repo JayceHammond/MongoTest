@@ -70,10 +70,19 @@ app.get("/rest/list", function (req, res) {
         priority: 1, status: 1, recipient: 1, submitter: 1, asignee_ID: 1, follower_IDs: 1, tags: 1}
       }
       
-      ticket.find({}).toArray(function(err, result){
-        if(err) throw err;
-        res.send(result);
-      })
+      const cursor = ticket.find(query, options);
+      const myArr = new Array;
+
+      if((await ticket.countDocuments(query)) == 0){
+        console.log("No docs found");
+      }
+      
+      await cursor.forEach(console.dir);
+      while(cursor.hasNext()){
+        myArr.push(JSON.stringify(cursor.next()));
+      }
+      res.send("Found these: " + myArr);
+
     } finally {
       await client.close();
     }
