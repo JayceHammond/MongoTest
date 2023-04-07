@@ -78,8 +78,8 @@ app.get("/rest/list", function (req, res) {
         console.log("No docs found");
       }
       
-      await cursor.forEach(console.dir);
-      while(cursor.hasNext()){
+      //await cursor.forEach(console.dir);
+      while(await cursor.hasNext()){
         myArr.push(JSON.stringify(cursor.next()));
       }
       for(var i = 0; i < myArr.length; i++){
