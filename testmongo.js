@@ -63,13 +63,19 @@ app.get("/rest/list", function (req, res) {
     try {
       const database = client.db("CMPS415");
       const ticket = database.collection("Ticket");
-      var cursor = ticket.find();
+      const query = {_id: {$gt: 0}};
+
+      const options = {
+        projection: {_id: 1, createdAt: 1, updatedAt: 0, type: 1, subject: 1, Description: 1, priority: 1, status: 1, recipient: 1, submitter: 1, asignee_ID: 1, follower_IDs: 1, tags: 1}
+      }
       
-      cursor.forEach(function(err, ticket){
-        console.log(ticket);
-          res.send("Found these: " + JSON.stringify(ticket));
-      })
-      
+      const cursor = ticket.find(query, options);
+
+      if((await ticket.countDocuments(query)) == 0){
+        console.log("No docs found");
+      }
+
+      await cursor.forEach(console.dir);
 
     } finally {
       await client.close();
