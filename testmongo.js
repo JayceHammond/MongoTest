@@ -74,8 +74,8 @@ app.get("/rest/list", function (req, res) {
       if((await ticket.countDocuments(query)) == 0){
         console.log("No docs found");
       }
-      res.send("Found these: " + JSON.stringify(await cursor.forEach(console.dir)));
-      //await cursor.forEach(console.dir);
+      
+      await cursor.forEach(res.send());
 
     } finally {
       await client.close();
