@@ -66,7 +66,7 @@ app.get("/rest/list", function (req, res) {
       const query = {_id: {$gt: 0}};
 
       const options = {
-        projection: {_id: 1, createdAt: 1, updatedAt: 0, type: 1, subject: 1, Description: 1, priority: 1, status: 1, recipient: 1, submitter: 1, asignee_ID: 1, follower_IDs: 1, tags: 1}
+        projection: {_id: 1, createdAt: 1, updatedAt: 1, type: 1, subject: 1, Description: 1, priority: 1, status: 1, recipient: 1, submitter: 1, asignee_ID: 1, follower_IDs: 1, tags: 1}
       }
       
       const cursor = ticket.find(query, options);
