@@ -71,6 +71,7 @@ app.get("/rest/list", function (req, res) {
       }
       
       ticket.find({}).toArray(function(err, result){
+        if(err) throw err;
         res.send(result);
       })
     } finally {
