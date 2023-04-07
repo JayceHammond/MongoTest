@@ -63,8 +63,11 @@ app.get("/rest/list", function (req, res) {
     try {
       const database = client.db("CMPS415");
       const ticket = database.collection("Ticket");
-      var allTickets = await ticket.find({});
-      console.log(allTickets);
+      ticket.find({}).toArray(function(err, result){
+        if(err) throw err;
+        console.log(result);
+      });
+
     } finally {
       await client.close();
     }
