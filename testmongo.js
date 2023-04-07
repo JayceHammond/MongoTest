@@ -72,6 +72,7 @@ app.get("/rest/list", function (req, res) {
       
       const cursor = ticket.find(query, options);
       const myArr = new Array;
+      const response = new JSON;
 
       if((await ticket.countDocuments(query)) == 0){
         console.log("No docs found");
@@ -81,7 +82,11 @@ app.get("/rest/list", function (req, res) {
       while(cursor.hasNext()){
         myArr.push(JSON.stringify(cursor.next()));
       }
-      res.send("Found these: " + myArr);
+      for(var i = 0; i < myArr.length; i++){
+        console.log(myArr[i]);
+        response += " " + myArr[i];
+      }
+      res.send("Found these: " + myArr[i]);
 
     } finally {
       await client.close();
