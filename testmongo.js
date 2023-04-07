@@ -63,11 +63,18 @@ app.get("/rest/list", function (req, res) {
     try {
       const database = client.db("CMPS415");
       const ticket = database.collection("Ticket");
-      ticket.find({}).toArray(function(err, result){
-        if(err) throw err;
-        console.log(JSON.stringify(result));
-        res.send("Found these: " + JSON.stringify(result));
-      });
+      var cursor = db.collection(ticket.find());
+      
+      cursor.foreach(function(err, ticket){
+        if(ticket == null){
+          client.close();
+          return;
+        }
+        else{
+          res.send("Found these: " + JSON.stringify(ticket));
+        }
+      })
+      
 
     } finally {
       await client.close();
