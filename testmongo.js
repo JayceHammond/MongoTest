@@ -70,7 +70,7 @@ app.get("/rest/list", function (req, res) {
         priority: 1, status: 1, recipient: 1, submitter: 1, asignee_ID: 1, follower_IDs: 1, tags: 1}
       }
       
-      const cursor = ticket.find(query, options);
+      const cursor = ticket.find(query);
 
       if((await ticket.countDocuments(query)) == 0){
         console.log("No docs found");
