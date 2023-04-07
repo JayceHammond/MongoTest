@@ -72,7 +72,7 @@ app.get("/rest/list", function (req, res) {
       
       const cursor = ticket.find(query, options);
       const myArr = new Array;
-      const response = new JSON;
+      const response = new String;
 
       if((await ticket.countDocuments(query)) == 0){
         console.log("No docs found");
