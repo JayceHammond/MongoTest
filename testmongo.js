@@ -63,7 +63,7 @@ app.get("/rest/list", function (req, res) {
     try {
       const database = client.db("CMPS415");
       const ticket = database.collection("Ticket");
-      var cursor = database.collection(ticket.find());
+      var cursor = ticket.find();
       
       cursor.foreach(function(err, ticket){
         console.log(ticket);
