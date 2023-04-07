@@ -70,15 +70,16 @@ app.get("/rest/list", function (req, res) {
         priority: 1, status: 1, recipient: 1, submitter: 1, asignee_ID: 1, follower_IDs: 1, tags: 1}
       }
       
-      const cursor = ticket.find(query);
+      const tickets = await ticket.find(query);
 
       if((await ticket.countDocuments(query)) == 0){
         console.log("No docs found");
       }
       
-      await cursor.forEach(console.dir);
+      console.log(tickets);
+      await tickets.forEach(console.dir);
 
-      res.send("Found these: " + JSON.stringify(cursor.forEach(x => x)));
+      res.send("Found these: " + JSON.stringify(tickets));
     } finally {
       await client.close();
     }
