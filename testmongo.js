@@ -66,13 +66,8 @@ app.get("/rest/list", function (req, res) {
       var cursor = db.collection(ticket.find());
       
       cursor.foreach(function(err, ticket){
-        if(ticket == null){
-          client.close();
-          return;
-        }
-        else{
+        console.log(ticket);
           res.send("Found these: " + JSON.stringify(ticket));
-        }
       })
       
 
