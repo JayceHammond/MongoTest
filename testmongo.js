@@ -65,7 +65,7 @@ app.get("/rest/list", function (req, res) {
       const ticket = database.collection("Ticket");
       var cursor = ticket.find();
       
-      cursor.foreach(function(err, ticket){
+      cursor.forEach(function(err, ticket){
         console.log(ticket);
           res.send("Found these: " + JSON.stringify(ticket));
       })
