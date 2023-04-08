@@ -79,10 +79,25 @@ app.post("/rest/ticket/", function (req, res){
       const client = new MongoClient(uri);
       const database = client.db("CMPS415");
       const ticket = database.collection("Ticket");
-      let newDocument = req.body;
-      newDocument.recipient = "Batman";
-      let result = await ticket.insertOne(newDocument);
-      res.send(result).status(204);
+      var newTicket = {
+        createdAt: req.body.createdAt,
+        updatedAt: req.body.updatedAt,
+        type: req.body.type,
+        subject: req.body.subject,
+        Description: req.body.Description,
+        priority: req.body.priority,
+        status: req.body.status,
+        recipient: req.body.recipient,
+        submitter: req.body.submitter,
+        assignee_ID: req.body.assignee_ID,
+        follower_IDs: req.body.follower_IDs,
+        tags: req.body.tags
+      }
+
+
+
+      let result = await ticket.insertOne(newTicket);
+      res.send(JSON.stringify(result)).status(204);
     }finally{
       await client.close();
     }
