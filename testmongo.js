@@ -63,7 +63,7 @@ app.get("/rest/list", function (req, res) {
       const database = client.db("CMPS415");
       const ticket = database.collection("Ticket");
       let results = await ticket.find({}).limit(50).toArray()
-      res.send(results).status(200);
+      res.send(JSON.stringify(results)).status(200);
     } finally {
       await client.close();
     }
@@ -97,7 +97,7 @@ app.post("/rest/ticket/", function (req, res){
 
 
       await ticket.insertOne(newTicket);
-      let result = ticket.find().sort( { _id : -1 } ).limit(1);
+      let result = ticket.find().sort( { _id : -1 } ).limit(1).toArray();
       res.send(JSON.stringify(result)).status(204);
     }finally{
       await client.close();
