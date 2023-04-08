@@ -96,7 +96,8 @@ app.post("/rest/ticket/", function (req, res){
 
 
 
-      let result = await ticket.insertOne(newTicket);
+      await ticket.insertOne(newTicket);
+      let result = ticket.find().sort( { _id : -1 } ).limit(1);
       res.send(JSON.stringify(result)).status(204);
     }finally{
       await client.close();
