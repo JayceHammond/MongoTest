@@ -79,7 +79,9 @@ app.post("/rest/ticket/", function (req, res){
       const client = new MongoClient(uri);
       const database = client.db("CMPS415");
       const ticket = database.collection("Ticket");
+      //let newId = await ticket.find().sort( { _id : -1 } ).limit(1).toArray();
       var newTicket = {
+        _id: req.body._id,
         createdAt: req.body.createdAt,
         updatedAt: req.body.updatedAt,
         type: req.body.type,
@@ -97,7 +99,7 @@ app.post("/rest/ticket/", function (req, res){
 
 
       await ticket.insertOne(newTicket);
-      let result = ticket.find().sort( { _id : -1 } ).limit(1).toArray();
+      let result = await ticket.findOne({}, {}, {sort});
       res.send(JSON.stringify(result)).status(204);
     }finally{
       await client.close();
