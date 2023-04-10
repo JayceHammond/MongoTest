@@ -109,7 +109,7 @@ app.post("/rest/ticket/", function (req, res){
       }
 
       if (newTicket._id == null || newTicket.createdAt == null || newTicket.updatedAt == null || newTicket.type == null || newTicket.subject == null || 
-        newTicket.Description == null || newTicket.priority == null || newTicket.status == null || newTicket.recipeint == null || 
+        newTicket.Description == null || newTicket.priority == null || newTicket.status == null || newTicket.recipient == null || 
         newTicket.submitter == null || newTicket.assignee_ID == null || newTicket.follower_IDs == null ||
         newTicket.tags == null) {
         return res.send({ message: "Content cannot be null" });
