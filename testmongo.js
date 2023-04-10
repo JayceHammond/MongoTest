@@ -39,18 +39,23 @@ app.get("/rest/ticket/:id", function (req, res) {
     try {
       const database = client.db("CMPS415");
       const tickets = database.collection("Ticket");
+      const searchId = req.params.id;
 
       // Hardwired Query for a part that has partID '12345'
       // const query = { partID: '12345' };
       // But we will use the parameter provided with the route
-      const query = { _id: parseInt(req.params.id) };
+
+      if(searchId < 1){
+        return res.send("Invalid ID");
+      }
+      const query = { _id: parseInt(searchId) };
       const ticket = await tickets.findOne(query);
       console.log(ticket);
       res.send("Found this: " + JSON.stringify(ticket)); //Use stringify to print a json
     } finally {
       // Ensures that the client will close when you finish/error
       await client.close();
-      console.log("Invalid ID");
+      console.log("Unexpected Error");
     }
   }
   run().catch(console.dir);
