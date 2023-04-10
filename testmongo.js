@@ -45,14 +45,9 @@ app.get("/rest/ticket/:id", function (req, res) {
       // const query = { partID: '12345' };
       // But we will use the parameter provided with the route
       const query = { _id: parseInt(req.params.id) };
-      const doesIdExist = await tickets.exists({_id: req.id});
-      if(!doesIdExist){
-        return res.send("Invalid Id");
-      }else{
       const ticket = await tickets.findOne(query);
       console.log(ticket);
       res.send("Found this: " + JSON.stringify(ticket)); //Use stringify to print a json
-      }
     } finally {
       // Ensures that the client will close when you finish/error
       await client.close();
