@@ -122,7 +122,7 @@ app.post("/rest/ticket/", function (req, res){
     }
 
 
-    if(newTicket._id == await ticket.findOne({ _id: newTicket._id })){
+    if(newTicket._id == ticket.findOne({ _id: newTicket._id })){
       return res.send("Duplicate Ids are not allowed");
     }
 
