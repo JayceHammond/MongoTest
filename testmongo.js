@@ -50,6 +50,9 @@ app.get("/rest/ticket/:id", function (req, res) {
       }
       const query = { _id: parseInt(searchId) };
       const ticket = await tickets.findOne(query);
+      if(ticket == null){
+        return res.send("Ticket not found");
+      }
       console.log(ticket);
       res.send("Found this: " + JSON.stringify(ticket)); //Use stringify to print a json
     } finally {
