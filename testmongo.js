@@ -108,10 +108,10 @@ app.post("/rest/ticket/", function (req, res){
         tags: req.body.tags
       }
 
-      if (req.body.createdAt == null || req.body.updatedAt == null || req.body.type == null || req.body.subject == null || 
-        req.body.Description == null || req.body.priority == null || req.body.status == null || req.body.recipeint == null || 
-        req.body.submitter == null || req.body.assignee_ID == null || req.body.follower_IDs == null ||
-        req.body.tags == null) {
+      if (newTicket._id == null || newTicket.createdAt == null || newTicket.updatedAt == null || newTicket.type == null || newTicket.subject == null || 
+        newTicket.Description == null || newTicket.priority == null || newTicket.status == null || newTicket.recipeint == null || 
+        newTicket.submitter == null || newTicket.assignee_ID == null || newTicket.follower_IDs == null ||
+        newTicket.tags == null) {
         return res.send({ message: "Content cannot be null" });
     }
 
