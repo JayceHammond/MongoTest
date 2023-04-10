@@ -9,9 +9,6 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
-const client = new MongoClient(uri);
-
-
 app.listen(port);
 console.log("Server started at http://localhost:" + port);
 
@@ -33,6 +30,8 @@ app.get("/say/:name", function (req, res) {
 
 // Route to access database:
 app.get("/rest/ticket/:id", function (req, res) {
+  const client = new MongoClient(uri);
+
   const searchKey = "{ Ticket ID : '" + parseInt(req.params.id) + "' }";
   console.log("Looking for: " + searchKey);
 
@@ -59,6 +58,8 @@ app.get("/rest/ticket/:id", function (req, res) {
 
 app.get("/rest/list", function (req, res) {
   console.log("Looking for: All Tickets");
+  const client = new MongoClient(uri);
+
 
   async function run() {
     try {
@@ -76,6 +77,8 @@ app.get("/rest/list", function (req, res) {
 
 app.post("/rest/ticket/", function (req, res){
   console.log("Posting Ticket: ");
+  const client = new MongoClient(uri);
+
 
   async function run(){
     try{
