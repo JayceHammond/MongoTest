@@ -28,7 +28,7 @@ app.get("/say/:name", function (req, res) {
   res.send("Hello " + req.params.name + "!");
 });
 
-// Route to access database:
+// Get Ticket by Id
 app.get("/rest/ticket/:id", function (req, res) {
   const client = new MongoClient(uri);
 
@@ -40,10 +40,6 @@ app.get("/rest/ticket/:id", function (req, res) {
       const database = client.db("CMPS415");
       const tickets = database.collection("Ticket");
       const searchId = req.params.id;
-
-      // Hardwired Query for a part that has partID '12345'
-      // const query = { partID: '12345' };
-      // But we will use the parameter provided with the route
 
       if(searchId < 1){
         return res.send("Invalid ID");
@@ -63,6 +59,7 @@ app.get("/rest/ticket/:id", function (req, res) {
   run().catch(console.dir);
 });
 
+//Get All Tickets
 app.get("/rest/list", function (req, res) {
   console.log("Looking for: All Tickets");
   const client = new MongoClient(uri);
