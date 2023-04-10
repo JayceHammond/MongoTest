@@ -121,8 +121,8 @@ app.post("/rest/ticket/", function (req, res){
       return res.send("Id, create time, and update time must be integers. Follower Ids must be an array.");
     }
 
-
-    if(newTicket._id == ticket.findOne({ _id: newTicket._id })){
+    const query = { _id: newTicket._id };
+    if(newTicket._id == ticket.findOne(query)){
       return res.send("Duplicate Ids are not allowed");
     }
 
