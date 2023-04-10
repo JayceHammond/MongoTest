@@ -108,7 +108,7 @@ app.post("/rest/ticket/", function (req, res){
         tags: req.body.tags
       }
 
-      if (Object.keys(req.body).length === 0) {
+      if (Object.keys(req.body.type).length === 0) {
         console.log("I am here");
         res.status(400).send({ message: "Content cannot be empty" });
         return;
