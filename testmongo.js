@@ -58,7 +58,6 @@ app.get("/rest/ticket/:id", function (req, res) {
     } finally {
       // Ensures that the client will close when you finish/error
       await client.close();
-      console.log("Unexpected Error");
     }
   }
   run().catch(console.dir);
