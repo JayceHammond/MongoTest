@@ -8,6 +8,10 @@ const uri =
 const express = require("express");
 const app = express();
 const port = 3000;
+
+const client = new MongoClient(uri);
+
+
 app.listen(port);
 console.log("Server started at http://localhost:" + port);
 
@@ -34,7 +38,6 @@ app.get("/rest/ticket/:id", function (req, res) {
 
   async function run() {
     try {
-      const client = new MongoClient(uri);
       const database = client.db("CMPS415");
       const tickets = database.collection("Ticket");
 
@@ -64,7 +67,6 @@ app.get("/rest/list", function (req, res) {
 
   async function run() {
     try {
-      const client = new MongoClient(uri);
       const database = client.db("CMPS415");
       const ticket = database.collection("Ticket");
       let results = await ticket.find({}).limit(50).toArray()
@@ -82,7 +84,6 @@ app.post("/rest/ticket/", function (req, res){
 
   async function run(){
     try{
-      const client = new MongoClient(uri);
       const database = client.db("CMPS415");
       const ticket = database.collection("Ticket");
       //let newId = await ticket.find().sort( { _id : -1 } ).limit(1).toArray();
