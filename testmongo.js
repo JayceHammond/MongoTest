@@ -108,8 +108,11 @@ app.post("/rest/ticket/", function (req, res){
         tags: req.body.tags
       }
 
-      if (req.body.type != null) {
-        return res.status(400).send({ message: "Content cannot be null" });
+      if (req.body.createdAt == null || req.body.updatedAt == null || req.body.type == null || req.body.subject == null || 
+        req.body.Description == null || req.body.priority == null || req.body.status == null || req.body.recipeint == null || 
+        req.body.submitter == null || req.body.assignee_ID == null || req.body.follower_IDs == null ||
+        req.body.tags == null) {
+        return res.send({ message: "Content cannot be null" });
     }
 
 
@@ -118,7 +121,6 @@ app.post("/rest/ticket/", function (req, res){
       res.send(JSON.stringify(result)).status(204);
     }finally{
       await client.close();
-      console.log("Incomplete post body");
     }
   }
   run().catch(console.dir);
