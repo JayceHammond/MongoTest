@@ -93,7 +93,6 @@ app.post("/rest/ticket/", function (req, res){
       const ticket = database.collection("Ticket");
       //let newId = await ticket.find().sort( { _id : -1 } ).limit(1).toArray();
       var newTicket = {
-        _id: req.body._id,
         createdAt: req.body.createdAt,
         updatedAt: req.body.updatedAt,
         type: req.body.type,
@@ -108,7 +107,7 @@ app.post("/rest/ticket/", function (req, res){
         tags: req.body.tags
       }
 
-      if (newTicket._id == null || newTicket.createdAt == null || newTicket.updatedAt == null || newTicket.type == null || newTicket.subject == null || 
+      if (newTicket.createdAt == null || newTicket.updatedAt == null || newTicket.type == null || newTicket.subject == null || 
         newTicket.Description == null || newTicket.priority == null || newTicket.status == null || newTicket.recipient == null || 
         newTicket.submitter == null || newTicket.assignee_ID == null || newTicket.follower_IDs == null ||
         newTicket.tags == null) {
@@ -116,14 +115,9 @@ app.post("/rest/ticket/", function (req, res){
     }
 
     //Can't input a time stamp but the Phase I doc requires it be a postable field. Therefore check if the time stamp is at least an integer
-    if(typeof(newTicket._id) != 'number' || typeof(newTicket.createdAt) != 'number' || typeof(newTicket.updatedAt) != 'number' || typeof(newTicket.assignee_ID) != 'number'|| 
+    if(typeof(newTicket.createdAt) != 'number' || typeof(newTicket.updatedAt) != 'number' || typeof(newTicket.assignee_ID) != 'number'|| 
     typeof(newTicket.follower_IDs) != 'object'){
       return res.send("Id, create time, and update time must be integers. Follower Ids must be an array.");
-    }
-
-    const query = { _id: newTicket._id };
-    if(newTicket._id == ticket.findOne(query)){
-      return res.send("Duplicate Ids are not allowed");
     }
 
     if(typeof(newTicket.type) != 'string' || typeof(newTicket.subject) != 'string' || typeof(newTicket.Description) != 'string' || typeof(newTicket.priority) != 'string' ||
