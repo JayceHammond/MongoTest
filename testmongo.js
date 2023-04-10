@@ -49,6 +49,7 @@ app.get("/rest/ticket/:id", function (req, res) {
     } finally {
       // Ensures that the client will close when you finish/error
       await client.close();
+      console.log("Invalid ID");
     }
   }
   run().catch(console.dir);
@@ -66,6 +67,7 @@ app.get("/rest/list", function (req, res) {
       res.send(JSON.stringify(results)).status(200);
     } finally {
       await client.close();
+      console.log("No Tickets Found");
     }
   }
   run().catch(console.dir);
@@ -96,6 +98,11 @@ app.post("/rest/ticket/", function (req, res){
         tags: req.body.tags
       }
 
+      if (Object.keys(req.body).length === 0) {
+        console.log("I am here");
+        res.status(400).send({ message: "Content cannot be empty" });
+        return;
+    }
 
 
       await ticket.insertOne(newTicket);
@@ -103,6 +110,7 @@ app.post("/rest/ticket/", function (req, res){
       res.send(JSON.stringify(result)).status(204);
     }finally{
       await client.close();
+      console.log("Incomplete post body");
     }
   }
   run().catch(console.dir);
