@@ -121,6 +121,11 @@ app.post("/rest/ticket/", function (req, res){
       return res.send("Id, create time, and update time must be integers. Follower Ids must be an array.");
     }
 
+
+    if(newTicket._id == await ticket.findOne({ _id: newTicket._id })){
+      return res.send("Duplicate Ids are not allowed");
+    }
+
     if(typeof(newTicket.type) != 'string' || typeof(newTicket.subject) != 'string' || typeof(newTicket.Description) != 'string' || typeof(newTicket.priority) != 'string' ||
     typeof(newTicket.status) != 'string' || typeof(newTicket.recipient) != 'string' || typeof(newTicket.submitter) != 'string' || typeof(newTicket.tags) != 'object'){
       return res.send("Type, subject, description, priority level, status, recipient, and submitter must be strings. Tags must be an array.")
