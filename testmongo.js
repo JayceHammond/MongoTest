@@ -112,7 +112,18 @@ app.post("/rest/ticket/", function (req, res){
         newTicket.Description == null || newTicket.priority == null || newTicket.status == null || newTicket.recipient == null || 
         newTicket.submitter == null || newTicket.assignee_ID == null || newTicket.follower_IDs == null ||
         newTicket.tags == null) {
-        return res.send({ message: "Content cannot be null" });
+        return res.send("Content cannot be null");
+    }
+
+    //Can't input a time stamp but the Phase I doc requires it be a postable field. Therefore check if the time stamp is at least an integer
+    if(typeof(newTicket._id) != 'number' || typeof(newTicket.createdAt) != 'number' || typeof(newTicket.updatedAt) != 'number' || typeof(newTicket.assignee_ID) != 'number'|| 
+    typeof(newTicket.follower_IDs) != 'object'){
+      return res.send("Id, create time, and update time must be integers. Follower Ids must be an array.");
+    }
+
+    if(typeof(newTicket.type) != 'string' || typeof(newTicket.subject) != 'string' || typeof(newTicket.Description) != 'string' || typeof(newTicket.priority) != 'string' ||
+    typeof(newTicket.status) != 'string' || typeof(newTicket.recipient) != 'string' || typeof(newTicket.submitter) != 'string' || typeof(newTicket.tags) != 'object'){
+      return res.send("Type, subject, description, priority level, status, recipient, and submitter must be strings. Tags must be an array.")
     }
 
 
